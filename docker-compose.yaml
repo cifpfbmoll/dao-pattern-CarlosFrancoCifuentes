@@ -1,0 +1,32 @@
+version: "3.8"
+
+services: 
+    postgres_host:
+        image: postgres:latest
+        container_name: postgres
+        environment: 
+            POSTGRES_PASSWORD: "postgres"
+            restart: always #En caso de error
+        ports:
+            - 5432:5432
+        networks:
+            backend: 
+                aliases: 
+                    - postgres_host
+    api:
+        build:
+            context: . #El contexto se encuentra en este directorio
+            dockerfile: .\src\main\docker\Dockerfile.jvm #El dockerfile se encuentra en este contexto
+        image: fruits:dev
+        container_name: fruits-api
+        depends_on: 
+            - postgres_host
+        ports: 
+            - 8080:8080
+        networks: 
+            - backend
+
+networks:
+    backend:
+        name: network-backend
+        driver: bridge
