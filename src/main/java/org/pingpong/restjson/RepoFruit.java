@@ -8,8 +8,10 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+
 @ApplicationScoped
-public class RepoFruit {
+public class RepoFruit implements PanacheRepository<Fruit> {
 
     private Set<Fruit> fruits = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
