@@ -37,7 +37,7 @@ public class ResourceFruit {
     // curl -w "\n" http://localhost:8080/fruits/
     // -H "Content-Type: application/x-www-form-urlencoded"
     public String hello() {
-        return "Colmados Farmer Rick";
+        return "Hola que hace";
     }
 
     @GET
@@ -59,8 +59,9 @@ public class ResourceFruit {
     // curl -w "\n" http://localhost:8080/fruits/jkl -v
     public Response get(@PathParam("name") String name) {
         Optional<Fruit> fruit = service.getFruit(name);
-        return fruit.isPresent() ? Response.status(Response.Status.OK).entity(fruit.get()).build()
-                : Response.status(Response.Status.NOT_FOUND).build();
+        return fruit.isPresent() ? 
+            Response.status(Response.Status.OK).entity(fruit.get()).build() : 
+            Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST
