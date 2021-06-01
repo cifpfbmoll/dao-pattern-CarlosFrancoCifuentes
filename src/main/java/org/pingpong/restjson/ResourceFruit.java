@@ -1,7 +1,7 @@
 package org.pingpong.restjson;
 
 import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -48,32 +48,8 @@ public class ResourceFruit {
     // y sirve MediaType.APPLICATION_JSON
     // curl -w "\n" http://localhost:8080/fruits/ -H "Content-Type:
     // application/json"
-    public Set<Fruit> list() {
+    public List<Fruit> list() {
         return service.list();
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional // En los métodos POST y DELETE, tendremos que usar esta anotación ya que esto
-                   // esta tocando la BBDD.
-    // curl -d '{"name":"Banana", "description":"Brings a Gorilla too"}'
-    // -H "Content-Type: application/json" -X POST http://localhost:8080/fruits
-    public Set<Fruit> add(@Valid Fruit fruit) {
-        service.add(fruit);
-        return this.list();
-    }
-
-    @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional // En los métodos POST y DELETE, tendremos que usar esta anotación ya que esto
-                   // esta tocando la BBDD.
-    // curl -d '{"name":"Banana", "description":"Brings a Gorilla too"}'
-    // -H "Content-Type: application/json" -X DELETE http://localhost:8080/fruits
-    public Set<Fruit> delete(@Valid Fruit fruit) {
-        service.remove(fruit.getName());
-        return list();
     }
 
     @GET
@@ -85,5 +61,29 @@ public class ResourceFruit {
         Optional<Fruit> fruit = service.getFruit(name);
         return fruit.isPresent() ? Response.status(Response.Status.OK).entity(fruit.get()).build()
                 : Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional // En los métodos POST y DELETE, tendremos que usar esta anotación ya que esto
+                   // esta tocando la BBDD.
+    // curl -d '{"name":"Banana", "description":"Brings a Gorilla too"}'
+    // -H "Content-Type: application/json" -X POST http://localhost:8080/fruits
+    public List<Fruit> add(@Valid Fruit fruit) {
+        service.add(fruit);
+        return this.list();
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional // En los métodos POST y DELETE, tendremos que usar esta anotación ya que esto
+                   // esta tocando la BBDD.
+    // curl -d '{"name":"Banana", "description":"Brings a Gorilla too"}'
+    // -H "Content-Type: application/json" -X DELETE http://localhost:8080/fruits
+    public List<Fruit> delete(@Valid Fruit fruit) {
+        service.remove(fruit.getName());
+        return list();
     }
 }
