@@ -17,7 +17,7 @@ public class ServiceFruit {
     }
 
     public List<Fruit> list() {
-        return repo.list();
+        return repo.listAllOrderByName();
     }
 
     public void add(Fruit fruit) {
@@ -25,10 +25,12 @@ public class ServiceFruit {
     }
 
     public void remove(String name) {
-        repo.remove(name);
+        repo.deleteByName(name);
     }
 
     public Optional<Fruit> getFruit(String name) {
-        return name.isBlank()? Optional.ofNullable(null) : repo.get(name);
+        return name.isBlank()?
+            Optional.ofNullable(null) :
+            repo.findByNameOptional(name);
     }
 }
