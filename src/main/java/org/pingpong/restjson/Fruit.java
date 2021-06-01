@@ -22,7 +22,7 @@ public class Fruit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(unique = true) //El nombre será una columna de valor único
     @NotBlank
     private String name;
 
