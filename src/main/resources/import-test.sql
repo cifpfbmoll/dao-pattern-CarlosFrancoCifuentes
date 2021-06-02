@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS Fruit;
-CREATE TABLE Fruit (
-    id BIGINT(20) UNIQUE NOT NULL SERIAL,
+DROP TABLE IF EXISTS fruit;
+CREATE TABLE fruit (
+    id UNIQUE NOT NULL SERIAL,
     /*
     Bigint -> Número 8 bits
     Unique -> Unico
@@ -11,5 +11,5 @@ CREATE TABLE Fruit (
     description VARCHAR(255), 
     PRIMARY KEY (id)
 );
-INSERT INTO Fruit (id, name, description) VALUES (1000, 'Apple', 'Winter fruit');
-INSERT INTO Fruit (id, name, description) VALUES (2000, 'Pineapple', 'Tropical fruit');
+INSERT INTO fruit (id, name, description) VALUES (1000, 'Apple', 'Winter fruit');
+INSERT INTO fruit (id, name, description) VALUES (2000, 'Pineapple', 'Tropical fruit');
