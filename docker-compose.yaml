@@ -8,7 +8,7 @@ services:
             POSTGRES_PASSWORD: "postgres"
             restart: always #En caso de error
         ports:
-            - 5432:5432
+            - 5555:5432
         networks:
             backend: 
                 aliases: 
