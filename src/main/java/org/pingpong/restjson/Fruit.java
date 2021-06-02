@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity
-@Table(name = "Fruit")
+@Table(name = "fruit")
 @JsonPropertyOrder({ "name", "decription" })
 public class Fruit {
 
